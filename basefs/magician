@@ -1,0 +1,55 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+get() {
+	exit 0
+}
+
+unpack() {
+	# TIP: To generate new basefs tarball, modify contents of the 'root' directory
+	# and execute command below:
+	# tar -cvJf basefs.tar.xz root
+	ad unpacked
+	tar -xvf ./*tar* -C unpacked
+	exit "$?"
+	echo "Contents of 'unpacked'"
+	l unpacked
+}
+conf() {
+	# This is were package source should be configured
+	cd unpacked
+	cd *
+	echo "carrot-$RANDOM" > etc/hostname
+	cd ..
+	exit 0
+}
+comp() {
+	# This function build a package
+	cd unpacked
+	cd *
+	cd ..
+	exit 0
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	m unpacked/root fs
+	cd ..
+}
+
+case "$A" in
+	"get")
+		get;;
+	"unpack")
+		unpack;;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

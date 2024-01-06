@@ -1,0 +1,5 @@
+NAME="pkgset-base"
+VERSION="0.1"
+WEBSITE="https://leniuchowo.net/carrot"
+LICENSE="GPL-2"
+DESC="Virtual package that depends on everything what is required to run minimal CarrotOS environment"

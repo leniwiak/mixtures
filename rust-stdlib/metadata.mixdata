@@ -1,0 +1,5 @@
+NAME="rust-stdlib"
+VERSION="1.75.0"
+WEBSITE="https://rust-lang.org"
+LICENSE="MIT"
+DESC="Standard library for the Rust language"

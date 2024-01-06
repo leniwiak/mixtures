@@ -1,0 +1,8 @@
+RUNTIME=""
+COMPILE=("cmake" "ninja")
+BOTH=""
+ROPTIONAL=""
+COPTIONAL=""
+BOPTIONAL=""
+REPLACES=""
+CONFLICTS=""
