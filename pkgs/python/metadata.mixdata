@@ -1,0 +1,5 @@
+NAME="python"
+VERSION="3.12.1"
+WEBSITE="https://rust-lang.org"
+LICENSE="PSF"
+DESC="Python language interpreter"

@@ -1,0 +1,36 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+get() {
+	exit 0
+}
+unpack() {
+	exit 0
+}
+conf() {
+	exit 0
+}
+comp() {
+	exit 0
+}
+setup() {
+	exit 0
+}
+
+case "$A" in
+	"get")
+		get;;
+	"unpack")
+		unpack;;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

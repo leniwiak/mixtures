@@ -1,0 +1,8 @@
+RUNTIME=""
+COMPILE=""
+BOTH=("sqlite" "tcltk")
+ROPTIONAL=""
+COPTIONAL=""
+BOPTIONAL=""
+REPLACES=""
+CONFLICTS=""

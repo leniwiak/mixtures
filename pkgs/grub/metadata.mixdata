@@ -1,0 +1,5 @@
+NAME="grub-bios"
+VERSION="2.12"
+WEBSITE="https://www.gnu.org/software/grub/index.html"
+LICENSE="GPL-2"
+DESC="A program that allows you to boot your system with BIOS"
