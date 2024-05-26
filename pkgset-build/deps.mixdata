@@ -1,0 +1,8 @@
+RUNTIME=("make" "texinfo" "binutils" "bison" "m4" "bc" "autoconf" "automake" "autogen" "libtool" "pkg-config" "gettext" "gmp" "mpfr" "mpc" "libgcc" "gcc" "cmake" "meson" "ninja")
+COMPILE=""
+BOTH=""
+ROPTIONAL=""
+COPTIONAL=""
+BOPTIONAL=""
+REPLACES=""
+CONFLICTS=""

@@ -1,0 +1,51 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+DOWNLOAD= "https://github.com/Kitware/CMake/releases/download/v$VERSION/$NAME-$VERSION.tar.gz"
+
+conf() {
+	# This is were package source should be configured
+	cd unpacked
+	cd *
+	# ./autogen.sh
+	./configure --prefix=/usr
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	# This function builds a package
+	cd unpacked
+	cd *
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	cd unpacked
+	cd *
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation."
+		exit 1
+		;;
+esac

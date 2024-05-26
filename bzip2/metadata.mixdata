@@ -1,0 +1,5 @@
+NAME="bzip2"
+VERSION="1.0.8"
+WEBSITE="https://sourceware.org/bzip2/"
+LICENSE="OTHER_FREE"
+DESC="High-quality data compressor"

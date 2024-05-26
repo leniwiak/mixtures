@@ -1,8 +1,0 @@
-RUNTIME=("basefs" "carrot-utils" "dash" "glibc" "libgcc" "linux-headers" "mix" "openssl" "python" "rust-stdlib" "zlib")
-COMPILE=""
-BOTH=""
-ROPTIONAL=""
-COPTIONAL=""
-BOPTIONAL=""
-REPLACES=""
-CONFLICTS=""

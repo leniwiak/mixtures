@@ -1,0 +1,5 @@
+NAME="ninja-build"
+VERSION="1.11.1"
+WEBSITE="https://ninja-build.org/"
+LICENSE="APACHE-2.0"
+DESC="Small build system with a focus on speed"

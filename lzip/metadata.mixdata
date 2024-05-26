@@ -1,0 +1,5 @@
+NAME="lzip"
+VERSION="1.23"
+WEBSITE="https://www.nongnu.org/lzip/lzip.html"
+LICENSE="GPL-2"
+DESC="Lossless data compressor"

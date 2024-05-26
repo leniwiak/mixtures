@@ -1,0 +1,50 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+DOWNLOAD="https://www.x.org/archive//individual/lib/$NAME-$VERSION.tar.gz"
+
+conf() {
+	# This is were package source should be configured
+	cd unpacked
+	cd *
+	./configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	# This function build a package
+	cd unpacked
+	cd *
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	cd unpacked
+	cd *
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

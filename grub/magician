@@ -5,17 +5,8 @@
 export A="$1"
 source "./metadata.mixdata"
 
-get() {
-	wget -c "https://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION.tar.xz" "$NAME-$VERSION.tar.xz"
-}
-unpack() {
-	# Here we will unpack tarball with source
-	ad unpacked
-	tar -xvf ./*tar* -C unpacked
-	exit "$?"
-	echo "Contents of 'unpacked'"
-	l unpacked
-}
+DOWNLOAD="http://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION.tar.xz"
+
 conf() {
 	# This is were package source should be configured
 	cd unpacked
@@ -57,10 +48,8 @@ setup() {
 }
 
 case "$A" in
-	"get")
-		get;;
-	"unpack")
-		unpack;;
+	"none")
+		echo -ne "";;
 	"conf")
 		conf;;
 	"comp")

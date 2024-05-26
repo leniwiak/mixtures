@@ -1,0 +1,5 @@
+NAME="carrot-utils"
+VERSION="0.3.0"
+WEBSITE="https://carrot.leniwiak.pl"
+LICENSE="GPL3"
+DESC="Manage your system with ease!"

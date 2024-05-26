@@ -1,0 +1,5 @@
+NAME="efibootmgr"
+VERSION="17"
+WEBSITE="https://github.com/rhboot/efibootmgr"
+LICENSE="GPL2"
+DESC="Linux userpace tools to manager EFI Boot Manager"

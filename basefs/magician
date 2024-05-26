@@ -2,20 +2,6 @@
 export A="$1"
 source "./metadata.mixdata"
 
-get() {
-	exit 0
-}
-
-unpack() {
-	# TIP: To generate new basefs tarball, modify contents of the 'root' directory
-	# and execute command below:
-	# tar -cvJf basefs.tar.xz root
-	ad unpacked
-	tar -xvf ./*tar* -C unpacked
-	exit "$?"
-	echo "Contents of 'unpacked'"
-	l unpacked
-}
 conf() {
 	# This is were package source should be configured
 	cd unpacked
@@ -38,10 +24,8 @@ setup() {
 }
 
 case "$A" in
-	"get")
-		get;;
-	"unpack")
-		unpack;;
+	"none")
+		echo -ne "";;
 	"conf")
 		conf;;
 	"comp")

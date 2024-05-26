@@ -1,0 +1,5 @@
+NAME="mpfr"
+VERSION="4.2.1"
+WEBSITE="https://mpfr.org/"
+LICENSE="GPL-2"
+DESC="C library for multiple-precision floating-point computations with correct rounding"

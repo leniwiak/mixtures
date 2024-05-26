@@ -1,5 +1,5 @@
 NAME="basefs"
 VERSION="0.1"
-WEBSITE="https://leniuchowo.net/carrot"
+WEBSITE="https://carrot.leniwiak.pl"
 LICENSE="GPL-2"
 DESC="Basic set of files and directrories needed by CarrotOS"

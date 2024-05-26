@@ -1,0 +1,5 @@
+NAME="perl"
+VERSION="5.38.2"
+WEBSITE="https://perl.org"
+LICENSE=("GPL" "ARTISTIC")
+DESC="Perl language interpreter"

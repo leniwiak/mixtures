@@ -1,0 +1,5 @@
+NAME="tar"
+VERSION="1.35"
+WEBSITE="https://www.gnu.org/software/tar/"
+LICENSE="GPL-2"
+DESC="Provides the ability to create archives, as well as various other kinds of manipulation"

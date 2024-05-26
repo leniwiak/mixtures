@@ -19,8 +19,8 @@ setup() {
 }
 
 case "$A" in
-	"get")
-		get;;
+	"none")
+		echo -ne "";;
 	"unpack")
 		unpack;;
 	"conf")

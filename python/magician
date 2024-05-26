@@ -2,23 +2,13 @@
 export A="$1"
 source "./metadata.mixdata"
 
-get() {
-	wget -c "https://www.python.org/ftp/$NAME/$VERSION/Python-$VERSION.tar.xz" "$NAME-$VERSION.tar.xz"
-}
-unpack() {
-	# Here we will unpack tarball with source
-	ad unpacked
-	tar -xvf ./*tar* -C unpacked
-	exit "$?"
-	echo "Contents of 'unpacked'"
-	l unpacked
-}
+DOWNLOAD="http://www.python.org/ftp/$NAME/$VERSION/Python-$VERSION.tar.xz"
 conf() {
 	# This is were package source should be configured
 	cd unpacked
 	cd *
 	./autogen.sh
-	./configure --prefix="/usr"
+	./configure --prefix="/usr" --enable-optimizations --with-lto
 	exitcode="$?"
 	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
 	cd ..
@@ -41,14 +31,16 @@ setup() {
 	make DESTDIR="$INSTALLTO" install
 	exitcode="$?"
 	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd "$INSTALLTO"
+	sl python3 python
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
 	cd ..
 }
 
 case "$A" in
-	"get")
-		get;;
-	"unpack")
-		unpack;;
+	"none")
+		echo -ne "";;
 	"conf")
 		conf;;
 	"comp")

@@ -1,6 +1,6 @@
 RUNTIME=""
 COMPILE=""
-BOTH=("sqlite" "tcltk")
+BOTH=("sqlite" "tcl" "tk")
 ROPTIONAL=""
 COPTIONAL=""
 BOPTIONAL=""

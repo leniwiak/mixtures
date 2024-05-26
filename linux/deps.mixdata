@@ -1,5 +1,5 @@
 RUNTIME=""
-COMPILE=""
+COMPILE=("libefi")
 BOTH=""
 ROPTIONAL=""
 COPTIONAL=""
