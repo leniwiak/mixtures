@@ -1,0 +1,5 @@
+NAME="unifont"
+VERSION="15.1.05"
+WEBSITE="https://www.unifoundry.com/unifont/index.html"
+LICENSE="GPL-2"
+DESC="Glyphs for every printable code point in the Unicode Basic Multilingual Plane"
