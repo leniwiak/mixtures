@@ -1,0 +1,64 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="python"
+DESC="Python language interpreter"
+VERSION="3.12.1"
+WEBSITE="https://$NAME.org"
+LICENSE="PSF-2.0"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=("tk")
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=("sqlite" "tcl")
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://www.$NAME.org/ftp/$NAME/$VERSION/Python-$VERSION.tar.xz"
+KEEP_FILES=""
+
+conf() {
+	./autogen.sh
+	./configure --prefix="/usr" --enable-optimizations --with-lto
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd "$INSTALLTO"
+	sl python3 python
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

@@ -1,5 +1,0 @@
-NAME="zlib"
-VERSION="1.3"
-WEBSITE="https://www.zlib.net"
-LICENSE="GPL-2"
-DESC="A massively spiffy yet delicately unobtrusive compression library"

@@ -1,5 +1,0 @@
-NAME="openssl"
-VERSION="3.2.0"
-WEBSITE="https://openssl.org"
-LICENSE="APACHE"
-DESC="Secure Sockets Layer toolkit"

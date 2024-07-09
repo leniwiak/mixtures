@@ -1,0 +1,53 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="meson"
+DESC="Build system meant to be both extremely fast, and, even more importantly, as user friendly as possible"
+VERSION="1.3.1"
+WEBSITE="https://mesonbuild.com/"
+LICENSE="Apache-2.0"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="https://github.com/mesonbuild/$NAME/archive/refs/tags/$VERSION.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	exit 0
+}
+comp() {
+	exit 0
+}
+setup() {
+	ad -p "$INSTALLTO/bin/"
+	c meson.py "$INSTALLTO/bin/meson"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation."
+		exit 1
+		;;
+esac

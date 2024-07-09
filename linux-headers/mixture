@@ -1,0 +1,58 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="linux-headers"
+DESC="Kernel header files"
+VERSION="6.1.92"
+WEBSITE="https://kernel.org"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+COMMON_DOWNLOAD_DIR=("linux")
+
+conf() {
+	exit 0
+}
+comp() {
+	# This function build a package
+	exit 0
+}
+setup() {
+	make headers_install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	ad "$INSTALLTO/usr/include/" || exit 1
+	c -o "usr/include/" "$INSTALLTO/usr/include/" || exit 1
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

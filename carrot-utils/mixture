@@ -1,0 +1,69 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="carrot-utils"
+DESC="Manage your system with ease!"
+VERSION="0.3.1"
+WEBSITE="https://carrot.leniwiak.pl"
+LICENSE="GPL-3"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD=("file:///home/leniuch/Projects/pkgs/$NAME-$VERSION.tar.xz" "file:///home/leniuch/Projects/pkgs/carrot-libs-0.2.6.tar.xz")
+
+KEEP_FILES=""
+
+conf() {
+	exit 0
+}
+comp() {
+	cargo build --release
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	cd target/release/
+	ad "$INSTALLTO/bin" -p
+	ad "$INSTALLTO/lib/x86_64-unknown-linux-gnu" -p
+	c -o "libcarrot_utils.rlib" "$INSTALLTO/lib/x86_64-unknown-linux-gnu/"
+	rex own 0,0 rex userutil
+	rex perm n,n,n,u rex userutil
+	for file in *
+	do 
+		if [[ -x "$file" && -f "$file" ]]
+		then 
+			c -o "$file" "$INSTALLTO/bin/"
+		fi
+	done
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

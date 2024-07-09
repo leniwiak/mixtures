@@ -1,0 +1,49 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="pkgset-base"
+DESC="Virtual package, that depends on everything what is required to run minimal CarrotOS environment"
+VERSION="0.1"
+WEBSITE="https://carrot.leniwiak.pl"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=("basefs" "bzip2" "carrot-utils" "glibc" "gzip" "libgcc" "linux-headers" "lz4" "lzip" "lzo" "lzop" "mix" "openssl" "perl" "python" "rust-standard-library" "tar" "xz" "zlib" "zstd")
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD=""
+KEEP_FILES=""
+
+conf() {
+	exit 0
+}
+comp() {
+	exit 0
+}
+setup() {
+	exit 0
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

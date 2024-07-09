@@ -1,5 +1,0 @@
-NAME="libgcc"
-VERSION="13.2.0"
-WEBSITE="https://www.gnu.org/software/gcc/"
-LICENSE="GPL-2"
-DESC="GCC support library"

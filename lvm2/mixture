@@ -1,0 +1,60 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="lvm2"
+DESC="Userspace toolset that provide logical volume management facilities on Linux"
+VERSION="2.03.24"
+WEBSITE="https://sourceware.org/$NAME/"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=("libaio" "thin-provisioning-tools" "vdo")
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+DOWNLOAD="https://mirrors.kernel.org/sourceware/$NAME/LVM2.$VERSION.tgz"
+KEEP_FILES=""
+
+conf() {
+	./configure --prefix="/usr" --with-lvm1=none
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	cd "$INSTALLTO"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

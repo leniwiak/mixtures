@@ -1,5 +1,0 @@
-NAME="rush"
-VERSION="0.3.0"
-WEBSITE="https://carrot.leniwiak.pl"
-LICENSE="GPL3"
-DESC="Scripting language and command executor"

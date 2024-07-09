@@ -1,8 +1,0 @@
-RUNTIME=""
-COMPILE=""
-BOTH=("sqlite" "tcl" "tk")
-ROPTIONAL=""
-COPTIONAL=""
-BOPTIONAL=""
-REPLACES=""
-CONFLICTS=""

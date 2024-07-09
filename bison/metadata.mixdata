@@ -1,5 +1,0 @@
-NAME="bison"
-VERSION="3.8.2"
-WEBSITE="https://www.gnu.org/software/bison/"
-LICENSE="GPL-2"
-DESC="Converts annotated context-free grammar into a deterministic LR or GLR parser employing LALR(1) parser tables"

@@ -1,5 +1,0 @@
-NAME="pkg-config"
-VERSION="0.29.2"
-WEBSITE="https://www.freedesktop.org/wiki/Software/pkg-config/"
-LICENSE="GPL-2"
-DESC="It helps you insert the correct compiler options on the command line"

@@ -1,5 +1,0 @@
-NAME="cmake"
-VERSION="3.28.1"
-WEBSITE="https://cmake.org/"
-LICENSE="BSD"
-DESC="It’s a powerful, comprehensive solution for managing the software build process"

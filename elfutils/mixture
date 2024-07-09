@@ -1,0 +1,61 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="elfutils"
+DESC="Collection of utilities and libraries to read, create and modify ELF binary files"
+VERSION="0.191"
+WEBSITE="https://sourceware.org/$NAME/"
+LICENSE=("GPL-3" "LGPL-2" "LGPL-3")
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="https://sourceware.org/$NAME/ftp/$VERSION/$NAME-$VERSION.tar.bz2"
+
+KEEP_FILES=""
+
+conf() {
+	./configure --prefix=/usr --disable-debuginfod --disable-libdebuginfod
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation."
+		exit 1
+		;;
+esac

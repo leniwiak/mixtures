@@ -1,0 +1,62 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="freetype2"
+VERSION="2.13.2"
+WEBSITE="https://freetype.org"
+LICENSE=("GPL-2" "FTL")
+DESC="Freely available software library to render fonts"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="https://download.savannah.gnu.org/releases/freetype/freetype-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+conf() {
+	./configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	cd "$INSTALLTO"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

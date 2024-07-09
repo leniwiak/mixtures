@@ -1,5 +1,0 @@
-NAME="xz"
-VERSION="5.4.6"
-WEBSITE="https://tukaani.org/xz/"
-LICENSE="GPL-2"
-DESC="Free general-purpose data compression software with a high compression ratio"

@@ -1,5 +1,0 @@
-NAME="autoconf"
-VERSION="2.72"
-WEBSITE="https://www.gnu.org/software/autoconf/"
-LICENSE="GPL-2"
-DESC="Extensible package of M4 macros that produce shell scripts to automatically configure software source code packages"

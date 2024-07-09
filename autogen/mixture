@@ -1,0 +1,65 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="autogen"
+DESC="Tool designed to simplify the creation and maintenance of programs that contain large amounts of repetitious text"
+VERSION="5.18.16"
+WEBSITE="https://www.gnu.org/software/$NAME/"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS="guile"
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+CONFLICTS=""
+REPLACES=""
+
+DOWNLOAD="https://ftp.gnu.org/gnu/$NAME/rel$VERSION/$NAME-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+conf() {
+	ad build
+	cd build
+	../configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	cd build
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	cd build
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne"";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

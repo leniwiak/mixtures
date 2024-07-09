@@ -1,0 +1,57 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="lz4"
+DESC="Lossless compression algorithm with extemely fast decoder"
+VERSION="1.9.4"
+WEBSITE="https://$NAME.org/"
+LICENSE="MIT"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="https://github.com/$NAME/$NAME/releases/download/v$VERSION/$NAME-$VERSION.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	# This is were package source should be configured
+	exit 0
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make install PREFIX="$INSTALLTO/usr/"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

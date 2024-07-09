@@ -1,5 +1,0 @@
-NAME="rust"
-VERSION="1.75.0"
-WEBSITE="https://rust-lang.org"
-LICENSE="MIT"
-DESC="The Rust programming language"

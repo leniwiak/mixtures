@@ -1,0 +1,71 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="mandoc"
+DESC="Utility to format and compile manual pages"
+VERSION="1.14.6"
+WEBSITE="https://mandoc.bsd.lv/"
+LICENSE="BSD"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+DOWNLOAD="$WEBSITE/snapshots/$NAME-$VERSION.tar.gz"
+
+REPLACES=""
+CONFLICTS=""
+
+KEEP_FILES=""
+
+conf() {
+	../configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC" mandoc
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	cd build
+	# Do NOT install everything from this package
+	# make DESTDIR="$INSTALLTO" install
+	
+	# We're interested only in files mandoc (bin) and mandoc.1 (mandoc's manpage)
+	ad -p -i "$INSTALLTO"/usr/bin/
+	ad -p -i "$INSTALLTO"/usr/share/man/man1
+	c -o mandoc "$INSTALLTO"/usr/bin/mandoc
+	c -o mandoc.1 "$INSTALLTO"/usr/share/man/man1
+	perm rwx,rx,rx "$INSTALLTO"/usr/bin/mandoc
+	perm rw,r,r  "$INSTALLTO"/usr/share/man/man1/mandoc.1
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

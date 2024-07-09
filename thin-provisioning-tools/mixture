@@ -1,0 +1,56 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="thin-provisioning-tools"
+DESC="A suite of tools for manipulating the metadata of some device mappers"
+VERSION="1.0.12"
+WEBSITE="https://github.com/jthornber/$NAME"
+LICENSE="GPL-3"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=("rust-compiler")
+BOTH_DEPS=("libaio")
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="$WEBSITE/archive/refs/tags/v$VERSION.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	exit 0
+}
+comp() {
+	cargo build --release
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

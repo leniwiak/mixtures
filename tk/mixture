@@ -1,0 +1,63 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="tk"
+VERSION="8.6.14"
+WEBSITE="https://tcl.sourceforge.net"
+LICENSE="TCL"
+DESC="Graphical user interface toolkit for the TCL language"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=("libx11")
+BOTH_DEPS=("tcl")
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://prdownloads.sourceforge.net/tcl/$NAME$VERSION-src.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	cd unix
+	./configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	cd unix
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	cd unix
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

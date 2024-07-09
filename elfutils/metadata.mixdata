@@ -1,5 +1,0 @@
-NAME="elfutils"
-VERSION="0.191"
-WEBSITE="https://sourceware.org/elfutils/"
-LICENSE=("GPL-3" "LGPL2" "LGPL3")
-DESC="Collection of utilities and libraries to read, create and modify ELF binary files"

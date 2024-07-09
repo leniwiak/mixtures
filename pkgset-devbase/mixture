@@ -1,0 +1,49 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="pkgset-devbase"
+DESC="Virtual package, that depends on stuff essential to building everything"
+VERSION="0.1"
+WEBSITE="https://carrot.leniwiak.pl"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=("as" "autoconf" "autogen" "automake" "bc" "binutils" "bison" "cmake" "elfutils" "flex" "gawk" "gcc" "gettext" "gmp" "libtool" "m4" "make" "mandoc" "meson" "mpc" "mpfr" "ninja-build" "pkg-config" "texinfo")
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD=""
+KEEP_FILES=""
+
+conf() {
+	exit 0
+}
+comp() {
+	exit 0
+}
+setup() {
+	exit 0
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

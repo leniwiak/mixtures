@@ -1,5 +1,0 @@
-NAME="automake"
-VERSION="1.16.5"
-WEBSITE="https://www.gnu.org/software/automake/"
-LICENSE="GPL-2"
-DESC="Tool for automatically generating Makefile.in files compliant with the GNU Coding Standards"

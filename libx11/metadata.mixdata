@@ -1,5 +1,0 @@
-NAME="libX11"
-VERSION="1.8.9"
-WEBSITE="https://www.x.org/wiki/"
-LICENSE="BSD"
-DESC="Library routines that are used within all X Window applications"

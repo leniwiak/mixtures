@@ -1,0 +1,59 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="vdo"
+DESC="Userspace tools for managing VDO volumes"
+VERSION="8.3.0.71"
+WEBSITE="https://github.com/dm-vdo/$NAME"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=("libuuid" "libblkid")
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+DOWNLOAD="$WEBSITE/archive/refs/tags/$VERSION.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	#./configure --prefix="/usr"
+	exit 0
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	# There is probably no way to change installation PREFIX?
+	# It seems, that this package always tries to install info $DESTDIR/usr
+	make DESTDIR="$INSTALLTO" install
+	cd "$INSTALLTO"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

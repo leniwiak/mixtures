@@ -1,5 +1,0 @@
-NAME="gzip"
-VERSION="1.13"
-WEBSITE="https://www.gnu.org/software/gzip/"
-LICENSE="GPL-3"
-DESC="Popular data compression program"

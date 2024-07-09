@@ -1,8 +1,0 @@
-RUNTIME=""
-COMPILE=""
-BOTH=("lvm2" "unifont" "freetype2")
-ROPTIONAL=""
-COPTIONAL=""
-BOPTIONAL=""
-REPLACES=""
-CONFLICTS=""

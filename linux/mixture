@@ -1,0 +1,70 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="linux"
+DESC="Our beloved kernel"
+VERSION="6.1.92"
+WEBSITE="https://kernel.org"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=("libefi")
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://cdn.kernel.org/pub/linux/kernel/v6.x/$NAME-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+COMMON_DOWNLOAD_DIR=("linux-headers")
+
+conf() {
+	c -o ../../config .config
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	ad "$INSTALLTO/boot/" || exit 1
+	c arch/x86/boot/bzImage "$INSTALLTO/boot/bzImage-$VERSION" || exit 1
+	c System.map "$INSTALLTO/boot/System.map-$VERSION" || exit 1
+	c .config "$INSTALLTO/boot/config-$VERSION" || exit 1
+	cd "$INSTALLTO/boot" || exit 1
+	sl "bzImage-$VERSION" "bzImage" || exit 1
+	sl "System.map-$VERSION" "System.map" || exit 1
+	sl "config-$VERSION" "config" || exit 1
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"unpack")
+		unpack;;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

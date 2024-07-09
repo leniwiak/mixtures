@@ -1,0 +1,67 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="automake"
+DESC="Tool for automatically generating Makefile.in files compliant with the GNU Coding Standards"
+VERSION="1.16.5"
+WEBSITE="https://www.gnu.org/software/automake/"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+conf() {
+	ad build
+	cd build
+	../configure --prefix="/usr"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	cd build
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	cd build
+	make DESTDIR="$INSTALLTO" install
+	rf "$INSTALLTO"/usr/bin/aclocal-*
+	rf "$INSTALLTO"/usr/bin/automake-*
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

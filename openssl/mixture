@@ -1,0 +1,63 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="openssl"
+DESC="Secure Sockets Layer toolkit"
+VERSION="3.2.0"
+WEBSITE="https://$NAME.org"
+LICENSE="Apache-2.0"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://www.$NAME.org/source/$NAME-$VERSION.tar.gz"
+KEEP_FILES=""
+
+conf() {
+	./config --prefix="/usr" --openssldir="/etc/ssl" shared zlib-dynamic
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	ad -p "$INSTALLTO/usr/share/doc/openssl/" -p
+	c doc/ "$INSTALLTO/usr/share/doc/openssl/"
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

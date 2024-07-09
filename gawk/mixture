@@ -1,0 +1,61 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="gawk"
+DESC="Simple command-line text modifier and parser"
+VERSION="5.3.0"
+WEBSITE="https://www.gnu.org/software/$NAME"
+LICENSE="GPL-2"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="https://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION.tar.xz"
+
+KEEP_FILES=""
+
+ERR() {
+	if [[ $1 != 0 ]]
+	then
+		echo "- Previous command returned with exit code: $1"
+		exit $1
+	fi
+}
+
+conf() {
+	./configure --prefix="/usr"
+	ERR $?
+}
+comp() {
+	make -j"$PROC"
+	ERR $?
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	ERR $?
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

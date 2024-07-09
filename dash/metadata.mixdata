@@ -1,5 +1,0 @@
-NAME="dash"
-VERSION="0.5.12"
-WEBSITE="https://git.kernel.org/pub/scm/utils/dash/dash.git/"
-LICENSE="GPL-2"
-DESC="Minimalistic, quick and POSIX compatible shell"

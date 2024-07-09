@@ -1,5 +1,0 @@
-NAME="pkgset-boot"
-VERSION="0.1"
-WEBSITE="https://carrot.leniwiak.pl"
-LICENSE="GPL-2"
-DESC="Addition to 'pkgset-base' which adds booting support"

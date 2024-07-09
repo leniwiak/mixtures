@@ -1,0 +1,63 @@
+#!/bin/bash
+export A="$1"
+
+MAINTAINER="Leniwiak"
+MAINTAINER_CONTACT="oliwiernowicki4@gmail.com"
+
+NAME="gcc"
+VERSION="13.2.0"
+WEBSITE="https://www.gnu.org/software/$NAME/"
+LICENSE="GPL-2"
+DESC="Default C compiler from the GNU Project"
+
+RUNTIME_DEPS=""
+COMPILE_DEPS=""
+BOTH_DEPS=""
+EXTRA_RUNTIME_DEPS=""
+EXTRA_COMPILE_DEPS=""
+EXTRA_BOTH_DEPS=""
+
+REPLACES=""
+CONFLICTS=""
+
+DOWNLOAD="http://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION/$NAME-$VERSION.tar.xz"
+
+KEEP_FILES=""
+COMMON_DOWNLOAD_DIR=("libgcc")
+
+conf() {
+	# ./autogen.sh
+	./configure --prefix=/usr --disable-multilib --enable-languages=c
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	make DESTDIR="$INSTALLTO" install
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation."
+		exit 1
+		;;
+esac

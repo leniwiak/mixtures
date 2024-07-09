@@ -1,5 +1,0 @@
-NAME="freetype2"
-VERSION="2.13.2"
-WEBSITE="https://freetype.org"
-LICENSE=("GPL-2" "FTL")
-DESC="Freely available software library to render fonts"

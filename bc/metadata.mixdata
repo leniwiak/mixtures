@@ -1,5 +1,0 @@
-NAME="bc"
-VERSION="1.07.1"
-WEBSITE="https://www.gnu.org/software/bc/"
-LICENSE="GPL-2"
-DESC="Arbitrary precision numeric processing language"

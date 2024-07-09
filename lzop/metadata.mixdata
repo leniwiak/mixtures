@@ -1,5 +1,0 @@
-NAME="lzop"
-VERSION="1.04"
-WEBSITE="https://www.lzop.org"
-LICENSE="GPL-2"
-DESC="One of the fastest compressor and decompressor around"
