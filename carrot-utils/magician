@@ -1,0 +1,56 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+DOWNLOAD=("file:///home/leniuch/Projects/pkgs/$NAME-$VERSION.tar.xz" "file:///home/leniuch/Projects/pkgs/carrot-libs-0.3.1.tar.xz")
+
+conf() {
+	# This is were package source should be configured
+	exit 0
+}
+comp() {
+	# This function build a package
+	cd unpacked
+	cd carrot-utils
+	cargo build --release
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	cd unpacked
+	cd carrot-utils
+	cd target/release/
+	ad "$INSTALLTO/bin" -p
+	ad "$INSTALLTO/lib/x86_64-unknown-linux-gnu" -p
+	c -o "libcarrot_utils.rlib" "$INSTALLTO/lib/x86_64-unknown-linux-gnu/"
+	sudo own 0,0 rex userutil
+	sudo perm n,n,n,u rex userutil
+	for file in *
+	do 
+		if [[ -x "$file" && -f "$file" ]]
+		then 
+			c -o "$file" "$INSTALLTO/bin/"
+		fi
+	done
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

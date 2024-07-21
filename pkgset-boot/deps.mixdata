@@ -1,0 +1,8 @@
+RUNTIME=("grub" "efivar" "efibootmgr" "linux")
+COMPILE=""
+BOTH=""
+ROPTIONAL=""
+COPTIONAL=""
+BOPTIONAL=""
+REPLACES=""
+CONFLICTS=""

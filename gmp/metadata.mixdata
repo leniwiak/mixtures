@@ -1,0 +1,5 @@
+NAME="gmp"
+VERSION="6.3.0"
+WEBSITE="https://gmplib.org/"
+LICENSE="GPL-2"
+DESC="Multiple precision arithmetic library"

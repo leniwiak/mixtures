@@ -1,0 +1,5 @@
+NAME="libaio"
+WEBSITE="https://pagure.io/libaio"
+VERSION="0.3.113"
+LICENSE="GPL-2"
+DESC="Provides the Linux-native API for async I/O"

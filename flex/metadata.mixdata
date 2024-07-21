@@ -1,0 +1,5 @@
+NAME="flex"
+VERSION="2.6.4"
+WEBSITE="https://github.com/westes/flex"
+LICENSE="BSD"
+DESC="The Fast Lexical Analyzer - scanner generator for lexing in C and C++"

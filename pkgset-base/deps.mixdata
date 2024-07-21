@@ -1,0 +1,8 @@
+RUNTIME=("basefs" "glibc" "libgcc" "linux-headers" "perl" "openssl" "python" "rust-stdlib" "bzip2" "gzip" "lz4" "lzip" "lzo" "lzop" "xz" "zlib" "zstd" "tar" "carrot-utils" "mix")
+COMPILE=""
+BOTH=""
+ROPTIONAL=""
+COPTIONAL=""
+BOPTIONAL=""
+REPLACES=""
+CONFLICTS=""

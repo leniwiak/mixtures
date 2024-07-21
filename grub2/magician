@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# More help:
+# https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html#Simple-configuration
+export A="$1"
+source "./metadata.mixdata"
+
+DOWNLOAD="http://ftp.gnu.org/gnu/$NAME/$NAME-$VERSION.tar.xz"
+
+conf() {
+	# This is were package source should be configured
+	cd unpacked
+	cd *
+	./configure --prefix="/usr" --with-platform=efi
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+comp() {
+	# This function build a package
+	cd unpacked
+	cd *
+	make -j"$PROC"
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+	exit "$?"
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	cd unpacked
+	cd *
+	make DESTDIR="$INSTALLTO" install
+	cd "$INSTALLTO"
+	ad -p etc/default
+	cd etc/default
+	echo "# The file /etc/default/grub controls the operation of grub-mkconfig. It is sourced by a shell script, and so must be valid POSIX shell input" > grub
+	echo "GRUB_DEFAULT=0" >> grub
+	echo "GRUB_TIMEOUT_STYLE=hidden" >> grub
+	echo "GRUB_TIMEOUT=0" >> grub
+	echo "GRUB_DISTRIBUTOR='CarrotOS 1.0 American Chinchilla'" >> grub
+	echo "GRUB_CMDLINE_LINUX_DEFAULT='quiet splash'" >> grub
+	echo "GRUB_CMDLINE_LINUX=''" >> grub
+	exitcode="$?"
+	if [[ "$exitcode" != 0 ]];then exit "$exitcode";fi
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

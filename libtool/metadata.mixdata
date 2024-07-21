@@ -1,0 +1,5 @@
+NAME="libtool"
+VERSION="2.4.7"
+WEBSITE="https://www.gnu.org/software/libtool/"
+LICENSE="GPL-2"
+DESC="Generic library support script that hides the complexity of using shared libraries behind a consistent, portable interface"

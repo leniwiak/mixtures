@@ -1,0 +1,5 @@
+NAME="glibc"
+VERSION="2.38"
+WEBSITE="https://www.gnu.org/software/libc/"
+LICENSE="GPL-2"
+DESC="Default C library"

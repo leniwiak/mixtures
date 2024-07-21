@@ -1,0 +1,5 @@
+NAME="autogen"
+VERSION="5.18.16"
+WEBSITE="https://www.gnu.org/software/autogen/"
+LICENSE="GPL-2"
+DESC="Tool designed to simplify the creation and maintenance of programs that contain large amounts of repetitious text"

@@ -1,0 +1,5 @@
+NAME="binutils"
+VERSION="2.42"
+WEBSITE="https://www.gnu.org/software/binutils/"
+LICENSE="GPL-2"
+DESC="Collection of tools that operate on binaries"

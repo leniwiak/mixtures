@@ -1,0 +1,39 @@
+#!/bin/bash
+export A="$1"
+source "./metadata.mixdata"
+
+conf() {
+	# This is were package source should be configured
+	cd unpacked
+	cd *
+	echo "carrot-$RANDOM" > etc/hostname
+	cd ..
+	exit 0
+}
+comp() {
+	# This function build a package
+	cd unpacked
+	cd *
+	cd ..
+	exit 0
+}
+setup() {
+	# Here we're going to install a package to local database and set up some things (if needed)
+	m unpacked/root fs
+	cd ..
+}
+
+case "$A" in
+	"none")
+		echo -ne "";;
+	"conf")
+		conf;;
+	"comp")
+		comp;;
+	"setup")
+		setup;;
+	*)
+		echo "Unknown operation. Fail."
+		exit 1
+		;;
+esac

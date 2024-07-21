@@ -1,0 +1,5 @@
+NAME="m4"
+VERSION="1.4.19"
+WEBSITE="https://www.gnu.org/software/m4/"
+LICENSE="GPL-2"
+DESC="Implementation of the traditional Unix macro processor"

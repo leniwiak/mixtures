@@ -1,0 +1,5 @@
+NAME="gcc"
+VERSION="13.2.0"
+WEBSITE="https://www.gnu.org/software/gcc/"
+LICENSE="GPL-2"
+DESC="Default C compiler from the GNU Project"

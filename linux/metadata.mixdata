@@ -1,0 +1,5 @@
+NAME="linux"
+VERSION="6.1.92"
+WEBSITE="https://kernel.org"
+LICENSE="GPL-2"
+DESC="Our beloved kernel"

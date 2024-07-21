@@ -1,0 +1,5 @@
+NAME="lvm2"
+WEBSITE="https://sourceware.org/lvm2/"
+VERSION="2.03.24"
+LICENSE="GPL-2"
+DESC="Userspace toolset that provide logical volume management facilities on Linux"
